@@ -1,0 +1,82 @@
+warning: LF will be replaced by CRLF in combine_dataset_w_kaggle.ipynb.
+The file will have its original line endings in your working directory
+[1mdiff --git a/combine_dataset_w_kaggle.ipynb b/combine_dataset_w_kaggle.ipynb[m
+[1mindex 2fd6442..f6a5745 100644[m
+[1m--- a/combine_dataset_w_kaggle.ipynb[m
+[1m+++ b/combine_dataset_w_kaggle.ipynb[m
+[36m@@ -1,6 +1,73 @@[m
+ {[m
+[31m- "cells": [],[m
+[31m- "metadata": {},[m
+[32m+[m[32m "cells": [[m
+[32m+[m[32m  {[m
+[32m+[m[32m   "cell_type": "markdown",[m
+[32m+[m[32m   "metadata": {},[m
+[32m+[m[32m   "source": [[m
+[32m+[m[32m    "# Combining our top 3000 highest stream songs with the 3000 non-hit songs from kaggle dataset"[m
+[32m+[m[32m   ][m
+[32m+[m[32m  },[m
+[32m+[m[32m  {[m
+[32m+[m[32m   "cell_type": "code",[m
+[32m+[m[32m   "execution_count": null,[m
+[32m+[m[32m   "metadata": {},[m
+[32m+[m[32m   "outputs": [],[m
+[32m+[m[32m   "source": [[m
+[32m+[m[32m    "## combining dataset\n",[m
+[32m+[m[32m    "import pandas as pd\n",[m
+[32m+[m[32m    "import numpy as np\n",[m
+[32m+[m[32m    "\n",[m
+[32m+[m[32m    "\n",[m
+[32m+[m[32m    "def label_1(label):\n",[m
+[32m+[m[32m    "    return 1\n",[m
+[32m+[m[32m    "\n",[m
+[32m+[m[32m    "def label_0(label):\n",[m
+[32m+[m[32m    "    return 0\n",[m
+[32m+[m[32m    "\n",[m
+[32m+[m[32m    "data1 = pd.read_csv('labeled_spotify_data_genre_sort_streams.csv')\n",[m
+[32m+[m[32m    "data1 = data1.head(3000)\n",[m
+[32m+[m[32m    "\n",[m
+[32m+[m[32m    "data2 =pd.read_csv('dataset-of-10s.csv')\n",[m
+[32m+[m[32m    "data2 = data2.head(3200)\n",[m
+[32m+[m[32m    "data2 = data2.drop_duplicates(subset=['track', 'artist'])\n",[m
+[32m+[m[32m    "data2 = data2.head(3000)\n",[m
+[32m+[m[32m    "data2\n",[m
+[32m+[m[32m    "\n",[m
+[32m+[m[32m    "\n",[m
+[32m+[m[32m    "\n",[m
+[32m+[m[32m    "data1['Label'] = data1['Label'].apply(lambda label: label_1(label))\n",[m
+[32m+[m[32m    "data1=data1.drop(columns=['Streams', 'analysis_url', 'Genre'])\n",[m
+[32m+[m[32m    "data2 = data2.drop(columns=['uri', 'chorus_hit', 'sections', 'target'])\n",[m
+[32m+[m[32m    "data2.rename(columns={'track': 'Track Name','artist':'Artist' }, inplace=True)\n",[m
+[32m+[m[32m    "temp = np.ones(len(data2))\n",[m
+[32m+[m[32m    "data2['Label'] = temp\n",[m
+[32m+[m[32m    "data2['Label'] = data2['Label'].apply(lambda label: label_0(label))\n",[m
+[32m+[m[32m    "data = pd.concat([data1, data2])\n",[m
+[32m+[m[32m    "data\n",[m
+[32m+[m[32m    "data = data.reset_index(drop=True)\n",[m
+[32m+[m[32m    "data.to_csv('song_data_combine.csv', index=False)\n"[m
+[32m+[m[32m   ][m
+[32m+[m[32m  }[m
+[32m+[m[32m ],[m
+[32m+[m[32m "metadata": {[m
+[32m+[m[32m  "kernelspec": {[m
+[32m+[m[32m   "display_name": "Python 3",[m
+[32m+[m[32m   "language": "python",[m
+[32m+[m[32m   "name": "python3"[m
+[32m+[m[32m  },[m
+[32m+[m[32m  "language_info": {[m
+[32m+[m[32m   "codemirror_mode": {[m
+[32m+[m[32m    "name": "ipython",[m
+[32m+[m[32m    "version": 3[m
+[32m+[m[32m   },[m
+[32m+[m[32m   "file_extension": ".py",[m
+[32m+[m[32m   "mimetype": "text/x-python",[m
+[32m+[m[32m   "name": "python",[m
+[32m+[m[32m   "nbconvert_exporter": "python",[m
+[32m+[m[32m   "pygments_lexer": "ipython3",[m
+[32m+[m[32m   "version": "3.7.1"[m
+[32m+[m[32m  }[m
+[32m+[m[32m },[m
+  "nbformat": 4,[m
+  "nbformat_minor": 2[m
+ }[m
